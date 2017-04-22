@@ -15,7 +15,6 @@
 import java.util.ArrayList;
 
 
-
 //import testing.ToggleButton;
 
 
@@ -193,6 +192,21 @@ public class Hand {
 		Dice curr = hand.get(index);
 		int value = curr.getSideup();
 		return value;
+	}
+	
+	//added method
+	public void keepDice(String keep, Hand handInstance, gui frame) {
+		int dieNumber = 1;
+		endTurn = true;
+		for(Dice a : hand){
+			if(keep.charAt(dieNumber-1) != 'y') {
+				a.roll(); 
+				endTurn = false;
+			}
+			dieNumber++;
+		}
+		frame.initComponents();
+		//printHand(handInstance, frame);
 	}
 	
 }
