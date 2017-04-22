@@ -1,4 +1,4 @@
 
-public class YahtzeePEnemy {
-
+public class YahtzeePEnemy extends Enemy{
+	
 }

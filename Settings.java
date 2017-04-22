@@ -21,7 +21,7 @@ public class Settings {
 	private static int numDice;
 	private static int numRolls;
 	private static boolean config;
-	private Scanner file;
+
 	
 	Scanner in = new Scanner(System.in);
 	
@@ -34,17 +34,10 @@ public class Settings {
 	 * @param none
 	 * @throws exception if file "yahtzeeConfig.txt" is not found or is empty
 	 */
-	Settings(){
-		try{
-			file = new Scanner(new File("yahtzeeConfig.txt"));
-			numSides = file.nextInt();
-			numDice = file.nextInt();
-			numRolls = file.nextInt();
-			config = false;
-		}
-		catch(Exception e){
-			System.out.println("Error: file not found or empty!");
-		}
+	Settings(int s, int d, int t){
+		numSides = s;
+		numDice = d;
+		numRolls = t;
 	}
 	
 //methods

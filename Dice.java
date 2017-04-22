@@ -14,10 +14,12 @@ import java.util.*;
 public class Dice {
 //attributes
 	private int sideup;
+	Settings set;
 	
 //constructors
-	public Dice(){
+	public Dice(Settings a){
 		sideup = 1;
+		set = a;
 	}
 	
 //methods
@@ -37,7 +39,7 @@ public class Dice {
 	 */
 	public void roll(){
 		Random rand = new Random();
-		int x = rand.nextInt(Settings.getNumSides())+1;
+		int x = rand.nextInt(set.getNumSides())+1;
 		sideup = x;
 	}
 }

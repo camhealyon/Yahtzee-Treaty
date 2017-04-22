@@ -14,26 +14,28 @@
 
 import java.util.ArrayList;
 
-import javax.swing.JFrame;
+
 
 //import testing.ToggleButton;
 
-import java.awt.EventQueue;
+
 import java.util.*;
 
 public class Hand {
 //Attributes
-	private ArrayList<Dice> hand;	
+	public ArrayList<Dice> hand;	
 	private boolean endTurn;
 	private int total;
 	private int maxCount;
 	private int maxLength;
 	private boolean foundFH;
+	Settings set;
 	
 	Scanner in = new Scanner(System.in);
 	
 //constructor
-	public Hand(){
+	public Hand(Settings a){
+		set = a;
 		hand = new ArrayList<Dice>();
 		endTurn = false;
 		total = 0;
@@ -130,24 +132,7 @@ public class Hand {
 		return maxCount;
 	}
 	
-	/**
-	 * calculates the max straight that is found in the hand and sets the
-	 * private variable 'maxLength' to the appropriate value.
-	 */
-	public void calcMaxStraightFound(){
-		int curLength = 1;
-		maxLength = 0;
-		for(int counter = 0; counter < (Settings.getNumDice()-1); counter++){
-			Dice curr = hand.get(counter);
-			Dice next = hand.get(counter+1);
-			if(curr.getSideup()+1 == next.getSideup())
-				curLength++;
-			else if(curr.getSideup()+1 < next.getSideup())
-				curLength = 1;
-			if(curLength > maxLength)
-				maxLength = curLength;
-		}
-	}
+
 	
 	/**
 	 * returns the value stored in the private variable 'maxLength'
@@ -177,57 +162,19 @@ public class Hand {
 		return total;
 	}
 	
-	/**
-	 * sorts the hand of dice from least to greatest using insertion sort. 
-	 */
-	public void sortHand(){
-		int size = hand.size();
-		for(int i=1; i<size; i++){
-			for(int j=i; j>0; j--) {
-				Dice a = hand.get(j);
-				Dice b = hand.get(j-1);
-				if(a.getSideup() < b.getSideup()){
-					Dice temp = hand.get(j);
-					hand.set(j, hand.get(j-1));
-					hand.set(j-1, temp);
-				}
-			}
-		}
-	}
-	
+
 	
 	
 	/**
 	 * adds another die to the hand
 	 */
 	public void addDie() {
-		Dice a = new Dice();
+		Dice a = new Dice(set);
 		a.roll();
 		hand.add(a);
 		
 	}
 	
-	/**
-	 * Asks user which dice they want to keep in the hand and 
-	 * then rerolls those dice which are not kept. If all the
-	 * dice are kept then endTurn is kept at false otherwise 
-	 * it is set to true.
-	 * @param keep : String which represents the dice to keep
-	 * @param handInstance : instance of the current Hand
-	 * @param frame : instance of the current MainFrame
-	 */
-	public void keepDice(String keep, Hand handInstance) {
-		int dieNumber = 1;
-		endTurn = true;
-		for(Dice a : hand){
-			if(keep.charAt(dieNumber-1) != 'y') {
-				a.roll(); 
-				endTurn = false;
-			}
-			dieNumber++;
-		}
-
-	}
 	
 	/**
 	 * gets and returns the value stored in the private variable 'endTurn'
