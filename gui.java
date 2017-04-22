@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.util.logging.*;
 import java.awt.Graphics;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 
 /**
@@ -20,11 +21,15 @@ public class gui extends JFrame {
 	public JTextArea aiHealth;
     public JTextArea aiHealth2;
     public JTextArea aiScore;
-    private JLabel jLabel1;
-    private JLabel jLabel2;
-    private JLabel jLabel3;
-    private JLabel jLabel4;
-    private JLabel jLabel5;
+    
+    // !Every JLabel 1, 2, ... was changed to jToggleButtons
+    private JToggleButton jToggleButton1;
+    private JToggleButton jToggleButton2;
+    private JToggleButton jToggleButton3;
+    private JToggleButton jToggleButton4;
+    private JToggleButton jToggleButton5;
+    
+    
     private JPanel jPanel1;
     private JScrollPane jScrollPane1;
     private JScrollPane jScrollPane2;
@@ -45,12 +50,22 @@ public class gui extends JFrame {
     private ImageIcon enemy;
     int x = 20;
     int y = 30;
+    private Hand hand;
     
     /**
      * Creates new form gui
      */
     public gui() {
         initComponents();
+    }
+    
+    public void tempHandCreator(){
+    	Settings tempSet = new Settings(6, 5, 3);
+    	this.hand = new Hand(tempSet);
+    	for(int i=1; i<6; i++){
+    		hand.addDie();
+    	}
+    	System.out.println("Temp hand created");
     }
 
     /**
@@ -61,7 +76,10 @@ public class gui extends JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+    	
+    	tempHandCreator();
 
+    	
     	map = new ImageIcon("map.jpg");
     	player = new ImageIcon("New Piskel (3).png");
     	enemy = new ImageIcon("New Piskel (4).png");
@@ -87,11 +105,16 @@ public class gui extends JFrame {
         aiHealth = new JTextArea();
         jScrollPane6 = new JScrollPane();
         scoreTobeat = new JTextArea();
-        jLabel1 = new JLabel();
-        jLabel2 = new JLabel();
-        jLabel3 = new JLabel();
-        jLabel4 = new JLabel();
-        jLabel5 = new JLabel();
+        
+        /*
+        jToggleButton1 = new JToggleButton();
+       */
+        jToggleButton2 = new JToggleButton();
+        jToggleButton3 = new JToggleButton();
+        jToggleButton4 = new JToggleButton();
+        jToggleButton5 = new JToggleButton();
+        
+        
         saveGamebutton = new JButton();
         jScrollPane7 = new JScrollPane();
         messageCenter = new JTextArea();
@@ -136,21 +159,40 @@ public class gui extends JFrame {
         scoreTobeat.setColumns(20);
         scoreTobeat.setRows(5);
         jScrollPane6.setViewportView(scoreTobeat);
+        
+        
+        
+        DisplayDice dice = new DisplayDice(hand);
+        ArrayList<JToggleButton> dButtons = dice.getDiceArray();
+        
+        //for(JToggleButton die : diceButtons):
 
-        jLabel1.setIcon(new ImageIcon("C:\\Users\\DanielVM\\Desktop\\6.png")); // NOI18N
-        jLabel1.setText("jLabel1");
+        if(dButtons.isEmpty()){System.out.println("empty");}
+        
+        //JToggleButton tempButton = new JToggleButton("Hello");
+        //jToggleButton1 = tempButton;
+        jToggleButton1 = dButtons.get(0); 
+        
+        jToggleButton2 = dButtons.get(1); 
+        jToggleButton3 = dButtons.get(2); 
+        jToggleButton4 = dButtons.get(3); 
+        jToggleButton5 = dButtons.get(4); 
+        
+        //jToggleButton1.setText("jToggleButton1");
 
-        jLabel2.setIcon(new ImageIcon("C:\\Users\\DanielVM\\Desktop\\6.png")); // NOI18N
-        jLabel2.setText("jLabel1");
+        /*
+        jToggleButton2.setIcon(new ImageIcon("C:\\Users\\DanielVM\\Desktop\\6.png")); // NOI18N
+        jToggleButton2.setText("jToggleButton1");
 
-        jLabel3.setIcon(new ImageIcon("C:\\Users\\DanielVM\\Desktop\\6.png")); // NOI18N
-        jLabel3.setText("jLabel1");
+        jToggleButton3.setIcon(new ImageIcon("C:\\Users\\DanielVM\\Desktop\\6.png")); // NOI18N
+        jToggleButton3.setText("jToggleButton1");
 
-        jLabel4.setIcon(new ImageIcon("C:\\Users\\DanielVM\\Desktop\\6.png")); // NOI18N
-        jLabel4.setText("jLabel1");
+        jToggleButton4.setIcon(new ImageIcon("C:\\Users\\DanielVM\\Desktop\\6.png")); // NOI18N
+        jToggleButton4.setText("jToggleButton1");
 
-        jLabel5.setIcon(new ImageIcon("C:\\Users\\DanielVM\\Desktop\\6.png")); // NOI18N
-        jLabel5.setText("jLabel1");
+        jToggleButton5.setIcon(new ImageIcon("C:\\Users\\DanielVM\\Desktop\\6.png")); // NOI18N
+        jToggleButton5.setText("jToggleButton1");
+*/
 
         saveGamebutton.setText("Save Game");
 
@@ -181,15 +223,15 @@ public class gui extends JFrame {
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jToggleButton1, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel5, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jToggleButton2, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jToggleButton3, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel3, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jToggleButton4, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel4, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jToggleButton5, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jScrollPane7))))
                         .addGap(0, 2, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
@@ -226,11 +268,11 @@ public class gui extends JFrame {
                         .addComponent(jScrollPane7, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jToggleButton1, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jToggleButton2, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jToggleButton3, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jToggleButton4, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jToggleButton5, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                             .addComponent(rollDice, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -252,7 +294,7 @@ public class gui extends JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void rollDiceActionPerformed(ActionEvent evt) {//GEN-FIRST:event_rollDiceActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_rollDiceActionPerformed
 
     /**
