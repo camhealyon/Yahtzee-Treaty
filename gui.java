@@ -54,6 +54,7 @@ public class gui extends JFrame {
     int y = 30;
     private Hand hand;
     private DisplayDice dice;
+    private BattleScreen battle;
     
     /**
      * Creates new form gui
@@ -89,7 +90,12 @@ public class gui extends JFrame {
         
         rollDice.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                rollDiceActionPerformed(evt);
+            	if(YahtzeeTest.getCount() >= 2){
+            		battle = new BattleScreen(gui.this);
+    				battle.setVisible(true);
+            	} else {
+            		rollDiceActionPerformed(evt);
+            	}
             }
         });
         
@@ -99,6 +105,10 @@ public class gui extends JFrame {
         
         tempHandCreator();
         initComponents();
+    }
+    
+    public void rollButton(){
+    	
     }
     
     public void tempHandCreator(){
@@ -159,7 +169,12 @@ public class gui extends JFrame {
         aiHealth2.setRows(5);
         jScrollPane4.setViewportView(aiHealth2);
 
-        rollDice.setText("Roll Dice");
+        if(YahtzeeTest.getCount() >= 2){
+        	rollDice.setText("Start Battle");
+        }
+        else{
+        	rollDice.setText("Roll Dice");
+        }
 
         aiHealth.setColumns(20);
         aiHealth.setRows(5);
@@ -289,10 +304,10 @@ public class gui extends JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void rollDiceActionPerformed(ActionEvent evt) {//GEN-FIRST:event_rollDiceActionPerformed
-    	//frameInst.incrementCount();
+    	YahtzeeTest.incrementCount();
 		String keep = dice.isSelected();
-		//if(dice.getNumDiceSelected() == 5)
-			//frameInst.finishCount();
+		if(dice.getNumDiceSelected() == 5)
+			YahtzeeTest.finishCount();
 		System.out.println(keep);
 		hand.keepDice(keep, hand, YahtzeeTest.getFrame());
 		
