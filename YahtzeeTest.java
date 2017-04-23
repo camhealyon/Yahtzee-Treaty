@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 public class YahtzeeTest {
 	private static gui currFrame;
 	private static int count = 0;
+	private static int round = 1;
 	
 	public static gui getFrame(){
 		return currFrame;
@@ -36,6 +37,14 @@ public class YahtzeeTest {
 	 */
 	public static int getCount(){
 		return count;
+	}
+	
+	public static void incrementRound(){
+		round += 1;
+	}
+	
+	public static int getRound(){
+		return round;
 	}
 	
 	public static void main(String[] args){
