@@ -17,7 +17,7 @@ public class BattleScreen extends JDialog {
 	private JPanel Background;
 	ImageIcon Man = new ImageIcon("New Piskel (3).png");
 	ImageIcon Back = new ImageIcon("map.jpg");
-	ImageIcon Enemy = new ImageIcon("New Piskel (2).png");
+	//ImageIcon Enemy = new ImageIcon("New Piskel (2).png");
 	int x = 20, y = 30;
 	int eX = 1100, eY = 700;
 	private ArrayList<EnemyMovement> army;
@@ -82,7 +82,7 @@ public class BattleScreen extends JDialog {
 				if(ke.getKeyCode()==ke.VK_DOWN && y<Background.getHeight()-80) y+=10;
 				
 				for(EnemyMovement enemy : army){
-					int step = rn.nextInt(10 - 5 + 1) + 5;
+					int step = rn.nextInt(4 - 3 + 1) + 3 + rn.nextInt(4-2+1)+2;
 					if(x-enemy.getX() < 0)
 						enemy.changeX(-step);
 					else

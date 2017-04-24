@@ -48,12 +48,22 @@ public class YahtzeeTest {
 	}
 	
 	public static void main(String[] args){
+		java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+            	gui frame = new gui();
+        	    currFrame = frame;
+        	    frame.setTitle("Yahtzee");
+        	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        	    frame.setVisible(true);
+            }
+        });
+		/*
 		gui frame = new gui();
 	    currFrame = frame;
 	    frame.setTitle("Yahtzee");
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    frame.setVisible(true);
-		
+		*/
 	}
 	
 }

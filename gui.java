@@ -55,6 +55,7 @@ public class gui extends JFrame {
     private Hand hand;
     private DisplayDice dice;
     private BattleScreen battle;
+    private Enemy currentE;
     
     /**
      * Creates new form gui
@@ -104,7 +105,22 @@ public class gui extends JFrame {
     	enemy = new ImageIcon("New Piskel (4).png");
         
         tempHandCreator();
+        
         initComponents();
+    }
+    
+    public void enemyHealthButton(){
+    	System.out.println("enemy button");
+    	//Enemy currentE;
+    	System.out.println("enemy created");
+    	if(YahtzeeTest.getRound() == 1){
+    		currentE = new YSoldier();
+    		
+    	} else {
+    		currentE = new StrongYSoldier();
+    	}
+    	System.out.println("enemy finished");
+    	//aiHealth.setText(Integer.toString(currentE.getHealth()));
     }
     
     public void rollButton(){
@@ -176,6 +192,8 @@ public class gui extends JFrame {
         	rollDice.setText("Roll Dice");
         }
 
+        //enemyHealthButton();
+        //System.out.println("enemy button called");
         aiHealth.setColumns(20);
         aiHealth.setRows(5);
         jScrollPane5.setViewportView(aiHealth);
