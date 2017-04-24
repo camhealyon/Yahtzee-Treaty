@@ -23,7 +23,7 @@ public class Player {
 	
 	}
 	
-	void setHealth(int pHealth){
+	void setpHealth(int pHealth){
 		this.pHealth = pHealth;
 	}
 	
