@@ -220,7 +220,7 @@ public class gui extends JFrame {
         //playerHealth.setRows(5);
         jScrollPane1.setViewportView(playerHealth);
 
-        aiScore.setText("<html><div style='text-align: center;'>Enemy Score<br>"+ Integer.toString(10)+ "</div></html");
+        aiScore.setText("<html><div style='text-align: center;'>Enemy Score<br>"+ Integer.toString(aiList.get(0).getTotalDice())+ "</div></html");
         //aiScore.setColumns(20);
         //aiScore.setRows(5);
         jScrollPane2.setViewportView(aiScore);

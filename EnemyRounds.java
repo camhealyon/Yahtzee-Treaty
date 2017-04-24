@@ -10,6 +10,10 @@ public class EnemyRounds {
 		return enemy.getHealth();
 	}
 	
+	public int getTotalDice(){
+		return enemy.getTotalDice();
+	}
+	
 	public static void main(String[] args){
 		EnemyRounds curr = new EnemyRounds();
 		curr.getHealth();

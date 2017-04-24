@@ -127,16 +127,35 @@ public class Hand {
 	 * @return int maxCount
 	 */
 	public int getMaxOfKind(){
+		calcMaxOfKind();
 		return maxCount;
 	}
 	
-
+	/**
+	 * calculates the max straight that is found in the hand and sets the
+	 * private variable 'maxLength' to the appropriate value.
+	 */
+	public void calcMaxStraightFound(){
+		int curLength = 1;
+		maxLength = 0;
+		for(int counter = 0; counter < (Settings.getNumDice()-1); counter++){
+			Dice curr = hand.get(counter);
+			Dice next = hand.get(counter+1);
+			if(curr.getSideup()+1 == next.getSideup())
+				curLength++;
+			else if(curr.getSideup()+1 < next.getSideup())
+				curLength = 1;
+			if(curLength > maxLength)
+				maxLength = curLength;
+		}
+	}
 	
 	/**
 	 * returns the value stored in the private variable 'maxLength'
 	 * @return int maxLength
 	 */
 	public int getMaxLength(){
+		calcMaxStraightFound();
 		return maxLength;
 	}
 	
@@ -157,6 +176,7 @@ public class Hand {
 	 * @return int total
 	 */
 	public int getTotalAllDice(){
+		calcTotal();
 		return total;
 	}
 	
@@ -222,6 +242,12 @@ public class Hand {
 		}
 		frame.initComponents();
 		//printHand(handInstance, frame);
+	}
+	
+	public int getMaxScore(){
+		int max = getTotalAllDice();
+		//if(max < )
+		return max;
 	}
 	
 }
