@@ -33,7 +33,13 @@ public class Enemy {
 		health = a;
 	}
 	
-
+	int getTotalDice(){
+		int count = 0;
+		for (int i = 0; i < EnemyHand.hand.size(); i++){
+			count += EnemyHand.hand.get(i).getSideup();
+		}
+		return count;
+	}
 	
 	void rollAll(){
 		for (int i = 0; i < EnemyHand.hand.size(); i++){

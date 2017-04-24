@@ -25,8 +25,8 @@ public class gui extends JFrame {
 
 	public JLabel aiHealth;
 	//public JTextArea aiHealth;
-    public JTextArea aiHealth2;
-    public JTextArea aiScore;
+    public JLabel aiHealth2;
+    public JLabel aiScore;
     
     // !Every JLabel 1, 2, ... was changed to jToggleButtons
     private JToggleButton jToggleButton1;
@@ -45,7 +45,7 @@ public class gui extends JFrame {
     private JScrollPane jScrollPane7;
     public JButton launchBattle;
     public JTextArea messageCenter;
-    public JTextArea playerHealth;
+    public JLabel playerHealth;
     public JButton rollDice;
     private JButton saveGamebutton;
     public JTextArea scoreTobeat;
@@ -60,6 +60,7 @@ public class gui extends JFrame {
     private DisplayDice dice;
     private BattleScreen battle;
     private Enemy currentE;
+    private Player user;
     
     private ArrayList<EnemyRounds> aiList;
     
@@ -70,17 +71,31 @@ public class gui extends JFrame {
     	// Implemented above
         //jPanel1 = new JPanel();
         jScrollPane1 = new JScrollPane();
-        playerHealth = new JTextArea();
+        playerHealth = new JLabel("", SwingConstants.CENTER);
+        playerHealth.setFont(new Font("SansSerif", Font.PLAIN, 22));
+        playerHealth.setBackground(Color.CYAN.darker());
+        playerHealth.setOpaque(true);
+        playerHealth.setPreferredSize(new Dimension(230, 85));
+        
         jScrollPane2 = new JScrollPane();
-        aiScore = new JTextArea();
+        aiScore = new JLabel("", SwingConstants.CENTER);
+        aiScore.setFont(new Font("SansSerif", Font.PLAIN, 22));
+        aiScore.setBackground(Color.LIGHT_GRAY);
+        aiScore.setOpaque(true);
+        aiScore.setPreferredSize(new Dimension(230, 85));
         jScrollPane4 = new JScrollPane();
-        aiHealth2 = new JTextArea();
+        aiHealth2 = new JLabel("", SwingConstants.CENTER);
+        aiHealth2.setFont(new Font("SansSerif", Font.PLAIN, 22));
+        aiHealth2.setBackground(Color.LIGHT_GRAY);
+        aiHealth2.setOpaque(true);
+        aiHealth2.setPreferredSize(new Dimension(230, 85));
         rollDice = new JButton();
         jScrollPane5 = new JScrollPane();
         
         
         aiHealth = new JLabel("", SwingConstants.CENTER);
-        aiHealth.setFont(new Font("SansSerif", Font.BOLD, 22));
+        aiHealth.setFont(new Font("SansSerif", Font.PLAIN, 22));
+        aiHealth.setForeground(Color.black);
         aiHealth.setBackground(Color.red.darker());
         aiHealth.setOpaque(true);
         aiHealth.setPreferredSize(new Dimension(230, 85));
@@ -102,12 +117,15 @@ public class gui extends JFrame {
         messageCenter = new JTextArea();
         launchBattle = new JButton();
         aiList = new ArrayList<EnemyRounds>();
+        user = new Player();
         
         rollDice.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
             	if(YahtzeeTest.getCount() >= 2){
+            		//hand.sortHand();
             		battle = new BattleScreen(gui.this);
     				battle.setVisible(true);
+    				//hand.sortHand();
             	} else {
             		rollDiceActionPerformed(evt);
             	}
@@ -197,19 +215,23 @@ public class gui extends JFrame {
             .addGap(0, 314, Short.MAX_VALUE)
         );
 
-        playerHealth.setColumns(20);
-        playerHealth.setRows(5);
+        playerHealth.setText("<html><div style='text-align: center;'>Player Health<br>"+ Integer.toString(user.getpHealth())+ "</div></html");
+        //playerHealth.setColumns(20);
+        //playerHealth.setRows(5);
         jScrollPane1.setViewportView(playerHealth);
 
-        aiScore.setColumns(20);
-        aiScore.setRows(5);
+        aiScore.setText("<html><div style='text-align: center;'>Enemy Score<br>"+ Integer.toString(10)+ "</div></html");
+        //aiScore.setColumns(20);
+        //aiScore.setRows(5);
         jScrollPane2.setViewportView(aiScore);
 
-        aiHealth2.setColumns(20);
-        aiHealth2.setRows(5);
+        aiHealth2.setText("<html><div style='text-align: center;'>Players Score<br>"+ Integer.toString(10)+ "</div></html");
+        //aiHealth2.setColumns(20);
+        //aiHealth2.setRows(5);
         jScrollPane4.setViewportView(aiHealth2);
 
         if(YahtzeeTest.getCount() >= 2){
+        	hand.sortHand();
         	rollDice.setText("Start Battle");
         }
         else{

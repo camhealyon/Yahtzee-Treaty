@@ -14,7 +14,6 @@
 
 import java.util.ArrayList;
 
-
 //import testing.ToggleButton;
 
 
@@ -161,7 +160,23 @@ public class Hand {
 		return total;
 	}
 	
-
+	/**
+	 * sorts the hand of dice from least to greatest using insertion sort. 
+	 */
+	public void sortHand(){
+		int size = hand.size();
+		for(int i=1; i<size; i++){
+			for(int j=i; j>0; j--) {
+				Dice a = hand.get(j);
+				Dice b = hand.get(j-1);
+				if(a.getSideup() < b.getSideup()){
+					Dice temp = hand.get(j);
+					hand.set(j, hand.get(j-1));
+					hand.set(j-1, temp);
+				}
+			}
+		}
+	}
 	
 	
 	/**
