@@ -80,12 +80,14 @@ public class DisplayDice{
 		public void actionPerformed(ActionEvent event){
 			Object source = event.getSource();
 			JToggleButton button = (JToggleButton) source;
-			if(button.isSelected()){
-				numDiceSelected++;
-				button.setBorder(BorderFactory.createLineBorder(sBorderColor, 4));
-			} else {
-				numDiceSelected--;
-				button.setBorder(BorderFactory.createLineBorder(notSBorderColor, 1));
+			if(YahtzeeTest.getReset()==false){
+				if(button.isSelected()){
+					numDiceSelected++;
+					button.setBorder(BorderFactory.createLineBorder(sBorderColor, 4));
+				} else {
+					numDiceSelected--;
+					button.setBorder(BorderFactory.createLineBorder(notSBorderColor, 1));
+				}
 			}
 		}
 	}
@@ -115,6 +117,9 @@ public class DisplayDice{
 				selected = selected + "y";
 			else
 				selected = selected + "n";
+		}
+		if(YahtzeeTest.getReset() == true){
+			selected = "nnnnn";
 		}
 		return selected;
 	}

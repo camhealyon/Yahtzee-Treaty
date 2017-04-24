@@ -51,6 +51,18 @@ public class BattleScreen extends JDialog {
 		int numEnemies = 0;
 		if(YahtzeeTest.getRound() == 1){
 			numEnemies = 5;
+		} else if(YahtzeeTest.getRound() == 2) {
+			numEnemies = 3;
+		} else if(YahtzeeTest.getRound() == 3) {
+			numEnemies = 3;
+		} else if(YahtzeeTest.getRound() == 4) {
+			numEnemies = 1;
+		} else if(YahtzeeTest.getRound() == 5) {
+			numEnemies = 5;
+		} else if(YahtzeeTest.getRound() == 6) {
+			numEnemies = 3;
+		} else if(YahtzeeTest.getRound() == 7) {
+			numEnemies = 3;
 		} else {
 			numEnemies = 1;
 		}
@@ -97,7 +109,10 @@ public class BattleScreen extends JDialog {
 				repaint();
 				if(collided == true){
 					// OK button closes the dialog
-					JLabel text = new JLabel("You Collided!");
+					//YahtzeeTest.incrementCount();
+					JLabel text = new JLabel("You Collided!",SwingConstants.CENTER);
+					text.setPreferredSize(new Dimension(1100, 800));
+					
 					JButton ok = new JButton("OK");
 					ok.addActionListener(event -> setVisible(false));
 					
@@ -110,7 +125,6 @@ public class BattleScreen extends JDialog {
 					pack();
 					repaint();
 					
-					System.out.println("You collided");
 					
 					// ScorePanel
 					//scorePanel = new JPanel();

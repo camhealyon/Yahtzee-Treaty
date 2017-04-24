@@ -22,6 +22,7 @@ import java.util.*;
 public class Hand {
 //Attributes
 	public ArrayList<Dice> hand;	
+	public ArrayList<Dice> tempHand;
 	private boolean endTurn;
 	private int total;
 	private int maxCount;
@@ -66,6 +67,7 @@ public class Hand {
 	 * @return int The private variable foundFH
 	 */
 	public boolean getFullHouseFound(){
+		calcFullHouseFound();
 		return foundFH;
 	}
 	
@@ -84,7 +86,7 @@ public class Hand {
 		for(int dieValue = 1; dieValue <= Settings.getNumSides(); dieValue++){
 			currentCount = 0;
 			for(int diePosition = 0; diePosition < Settings.getNumDice(); diePosition++){
-				Dice curr = hand.get(diePosition);
+				Dice curr = tempHand.get(diePosition);
 				if(curr.getSideup() == dieValue)
 					currentCount++;
 				}
@@ -113,7 +115,7 @@ public class Hand {
 		for(int dieValue = 1; dieValue <=Settings.getNumSides(); dieValue++){
 			currentCount = 0;
 			for(int diePosition = 0; diePosition < Settings.getNumDice(); diePosition++){
-				Dice curr = hand.get(diePosition);
+				Dice curr = tempHand.get(diePosition);
 				if(curr.getSideup() == dieValue)
 					currentCount++;
 			}
@@ -139,8 +141,8 @@ public class Hand {
 		int curLength = 1;
 		maxLength = 0;
 		for(int counter = 0; counter < (Settings.getNumDice()-1); counter++){
-			Dice curr = hand.get(counter);
-			Dice next = hand.get(counter+1);
+			Dice curr = tempHand.get(counter);
+			Dice next = tempHand.get(counter+1);
 			if(curr.getSideup()+1 == next.getSideup())
 				curLength++;
 			else if(curr.getSideup()+1 < next.getSideup())
@@ -165,7 +167,7 @@ public class Hand {
 	 */
 	public void calcTotal(){
 		total = 0;
-		for(Dice curr : hand){
+		for(Dice curr : tempHand){
 			total = total + curr.getSideup();
 		}
 	}
@@ -198,6 +200,23 @@ public class Hand {
 		}
 	}
 	
+	/**
+	 * sorts the tempHand of dice from least to greatest using insertion sort. 
+	 */
+	public void sortTempHand(){
+		int size = tempHand.size();
+		for(int i=1; i<size; i++){
+			for(int j=i; j>0; j--) {
+				Dice a = tempHand.get(j);
+				Dice b = tempHand.get(j-1);
+				if(a.getSideup() < b.getSideup()){
+					Dice temp = tempHand.get(j);
+					tempHand.set(j, tempHand.get(j-1));
+					tempHand.set(j-1, temp);
+				}
+			}
+		}
+	}
 	
 	/**
 	 * adds another die to the hand
@@ -245,9 +264,38 @@ public class Hand {
 	}
 	
 	public int getMaxScore(){
+		tempHand = new ArrayList<Dice>(hand);
+		sortTempHand();
 		int max = getTotalAllDice();
-		//if(max < )
+		if(getMaxLength() == 5){
+			if(max < 50) max = 50;
+		} else if (getMaxLength() == 4){
+			if(max < 40) max = 40;
+		} else if(getMaxLength() == 3){
+			if(max < 30) max = 30;
+		} else if(getFullHouseFound() == true){
+			if(max < 25) max = 25;
+		}
+		
 		return max;
+	}
+	
+	public String getScoreType(){
+		tempHand = new ArrayList<Dice>(hand);
+		sortTempHand();
+		int max = getTotalAllDice();
+		String text = "Your score based on total of all dice";
+		if(getMaxLength() == 5){
+			if(max < 50) text = "Yahtzee! Score 50!";
+		} else if (getMaxLength() == 4){
+			if(max < 40) text = "Large Straight: Score 40";
+		} else if(getMaxLength() == 3){
+			if(max < 30) text = "Small Straight: Score 30";
+		} else if(getFullHouseFound() == true){
+			if(max < 25) text = "Full House: Score 25";
+		}
+		
+		return text;
 	}
 	
 }

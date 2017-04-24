@@ -5,9 +5,18 @@ public class YahtzeeTest {
 	private static gui currFrame;
 	private static int count = 0;
 	private static int round = 1;
+	private static boolean reset = false;
 	
 	public static gui getFrame(){
 		return currFrame;
+	}
+	
+	public static void setReset(boolean temp){
+		reset = temp;
+	}
+	
+	public static boolean getReset(){
+		return reset;
 	}
 	
 	/**
@@ -45,6 +54,16 @@ public class YahtzeeTest {
 	
 	public static int getRound(){
 		return round;
+	}
+
+	public static String getMessageText(Hand hand){
+		String text = "";
+		if(count == 0){
+			text = "Choose your dice wisely!";
+		} else {
+			text = hand.getScoreType();
+		}
+		return text;
 	}
 	
 	public static void main(String[] args){

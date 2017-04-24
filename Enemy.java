@@ -33,6 +33,13 @@ public class Enemy {
 		health = a;
 	}
 	
+	void updateDamage(int damage){
+		this.health = (this.health - damage);
+		if(health < 0){
+			health = 0;
+		}
+	}
+	
 	int getTotalDice(){
 		int count = 0;
 		for (int i = 0; i < EnemyHand.hand.size(); i++){
