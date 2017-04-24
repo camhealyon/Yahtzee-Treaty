@@ -5,6 +5,11 @@ public class Player {
 	int dSides = 6;
 	int dTurns = 3;
 	
+	public Player(){
+		for (int i = 0; i < getdNumber(); i++){
+			playerHand.addDie();
+		}
+	}
 	
 	int getpHealth(){
 		return pHealth;
@@ -23,7 +28,7 @@ public class Player {
 	
 	}
 	
-	void setpHealth(int pHealth){
+	void setHealth(int pHealth){
 		this.pHealth = pHealth;
 	}
 	
@@ -43,3 +48,4 @@ public class Player {
 		this.pHealth = (this.pHealth - damage);
 	}
 }
+
