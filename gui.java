@@ -9,6 +9,9 @@ import javax.swing.*;
 
 import java.util.logging.*;
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -20,7 +23,8 @@ import java.util.ArrayList;
  */
 public class gui extends JFrame {
 
-	public JTextArea aiHealth;
+	public JLabel aiHealth;
+	//public JTextArea aiHealth;
     public JTextArea aiHealth2;
     public JTextArea aiScore;
     
@@ -57,6 +61,8 @@ public class gui extends JFrame {
     private BattleScreen battle;
     private Enemy currentE;
     
+    private ArrayList<EnemyRounds> aiList;
+    
     /**
      * Creates new form gui
      */
@@ -71,7 +77,14 @@ public class gui extends JFrame {
         aiHealth2 = new JTextArea();
         rollDice = new JButton();
         jScrollPane5 = new JScrollPane();
-        aiHealth = new JTextArea();
+        
+        
+        aiHealth = new JLabel("", SwingConstants.CENTER);
+        aiHealth.setFont(new Font("SansSerif", Font.BOLD, 22));
+        aiHealth.setBackground(Color.red.darker());
+        aiHealth.setOpaque(true);
+        aiHealth.setPreferredSize(new Dimension(230, 85));
+        //aiHealth = new JTextArea();
         jScrollPane6 = new JScrollPane();
         scoreTobeat = new JTextArea();
         
@@ -88,6 +101,7 @@ public class gui extends JFrame {
         jScrollPane7 = new JScrollPane();
         messageCenter = new JTextArea();
         launchBattle = new JButton();
+        aiList = new ArrayList<EnemyRounds>();
         
         rollDice.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -104,9 +118,19 @@ public class gui extends JFrame {
     	player = new ImageIcon("New Piskel (3).png");
     	enemy = new ImageIcon("New Piskel (4).png");
         
+    	spawnEnemies();
         tempHandCreator();
         
         initComponents();
+    }
+    
+    public void spawnEnemies(){
+    	EnemyRounds currEnemy;
+    	if(YahtzeeTest.getRound() == 1){
+    		currEnemy = new EnemyRounds();
+    	}
+    	currEnemy = new EnemyRounds();
+    	aiList.add(currEnemy);
     }
     
     public void enemyHealthButton(){
@@ -194,8 +218,10 @@ public class gui extends JFrame {
 
         //enemyHealthButton();
         //System.out.println("enemy button called");
-        aiHealth.setColumns(20);
-        aiHealth.setRows(5);
+        
+        //aiHealth.setColumns(20);
+        //aiHealth.setRows(5);
+        aiHealth.setText("<html><div style='text-align: center;'>Enemy Health<br>"+ Integer.toString(aiList.get(0).getHealth())+ "</div></html");
         jScrollPane5.setViewportView(aiHealth);
 
         scoreTobeat.setColumns(20);
